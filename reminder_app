@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/.config/reminder_app
+./reminder_app_settings.py
