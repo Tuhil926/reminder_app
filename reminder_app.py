@@ -110,11 +110,17 @@ def show_message(title, message, is_snoozable=False):
         )
         ok3.grid(row=0, column=2, pady=20, padx=30)
     button_label.pack()
+
+    # makes the window borderless and puts it in the center. don't know/remember why wait_visibility is required
     root.overrideredirect(True)
     root.eval("tk::PlaceWindow . center")
     root.wait_visibility(root)
+
+    # makes the popup slightly transluscent
     root.attributes("-alpha", 0.8)
+
     root.mainloop()
+
     return is_snoozed
 
 
@@ -125,14 +131,12 @@ if not (os.path.isfile(reminders_file) and os.path.isfile(courses_file)):
     )
     exit()
 
-# show_message(
-#     "reminder lol",
-#     "this is a  that you neeeed to ",
-# )
-# show_message("reminder lol 2", "this is a message 2")
-
 courses = []
 reminders = []
+
+
+# I don't even remember how the rest of this code got so messy, but I'm afraid to change anything because it will break it.
+# It works fine, so I don't think there's a need to refactor it unless I need to add something
 
 # print(type(datetime.now().time()))
 after_10_min = datetime.datetime.now() + datetime.timedelta(minutes=10)
@@ -259,6 +263,3 @@ while True:
     prev_curr_hour = curr_hour
     prev_curr_minute = curr_minute
     prev_curr_second = curr_second
-
-
-# show_message("Class alert!", "You have a class now lol")
