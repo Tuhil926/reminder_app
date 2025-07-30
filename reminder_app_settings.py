@@ -146,6 +146,7 @@ def render_days(parent):
         wrapper.grid(row=0, column=day, padx=20, pady=20, sticky="n")
         weekday = tk.Label(wrapper, text=days[day], bg="#181818", fg="white")
         weekday.pack()
+        schedule = []
         for i in range(len(courses)):
             if courses[i][1] not in slots:
                 continue
@@ -153,13 +154,19 @@ def render_days(parent):
                 # schedule[day].append(
                 #     courses[i][0] + "  -  " + slots[courses[i][1]][day]
                 # )
-                cours = tk.Label(
-                    wrapper,
-                    text=courses[i][0] + "  -  " + slots[courses[i][1]][day],
-                    bg="#181818",
-                    fg="white",
-                )
-                cours.pack(pady=10)
+                class_start_time = slots[courses[i][1]][day]
+                entry_text = courses[i][0] + "  -  " + slots[courses[i][1]][day]
+                schedule.append((int(class_start_time.replace(":", "")), entry_text))
+        schedule.sort()
+        for _, entry_text in schedule:
+            cours = tk.Label(
+                wrapper,
+                text=entry_text,
+                bg="#181818",
+                fg="white",
+            )
+            cours.pack(pady=10)
+
 
 
 # Sorry for this messy code, tkinter is just bad, but it's very convenient to use for small things like this
